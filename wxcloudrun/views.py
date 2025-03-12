@@ -1,10 +1,60 @@
 from datetime import datetime
-from flask import render_template, request
+from flask import render_template, request, jsonify
 from run import app
 from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter, update_counterbyid
 from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
+from wxcloudrun.comfyui.drawing_tool import DrawingTool
 
+
+@app.route('/api/create_workflow_task_base', methods=['POST'])
+def create_workflow_task_base():
+    """API 接口：创建工作流任务"""
+    try:
+        # 初始化 DrawingTool
+        tool = DrawingTool()
+        
+        # 调用 create_workflow_task_base 方法
+        task_id = tool.create_workflow_task_base()
+        
+        # 返回成功响应
+        return jsonify({
+            'status': 'success',
+            'task_id': task_id
+        }), 200
+    except Exception as e:
+        # 返回错误响应
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+    
+@app.route('/api/get_task_status', methods=['GET'])
+def get_task_status():
+    """API 接口：获取任务状态"""
+    try:
+        # 获取请求体参数
+        task_id = request.args.get('task_id')
+        
+        # 初始化 DrawingTool
+        tool = DrawingTool()
+        
+        # 调用 get_task_images 方法
+        images = tool.get_task_images(task_id)
+        
+        # 返回成功响应
+        return jsonify({
+            'status': 'success',
+            'images': images
+        }), 200
+    except Exception as e:
+        # 返回错误响应
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+        
+    
 
 @app.route('/')
 def index():
@@ -64,3 +114,7 @@ def get_count():
     """
     counter = Counters.query.filter(Counters.id == 1).first()
     return make_succ_response(0) if counter is None else make_succ_response(counter.count)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
