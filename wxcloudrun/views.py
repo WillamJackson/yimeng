@@ -1,34 +1,9 @@
 from datetime import datetime
-from flask import render_template, request, jsonify
+from flask import render_template, request
 from run import app
 from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter, update_counterbyid
 from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
-from wxcloudrun.comfyui.drawing_tool import DrawingTool
-
-
-@app.route('/api/create_workflow_task_base', methods=['POST'])
-def create_workflow_task_base():
-    """API 接口：创建工作流任务"""
-    try:
-        # 初始化 DrawingTool
-        tool = DrawingTool()
-        
-        # 调用 create_workflow_task_base 方法
-        task_id = tool.create_workflow_task_base()
-        
-        # 返回成功响应
-        return jsonify({
-            'status': 'success',
-            'task_id': task_id
-        }), 200
-    except Exception as e:
-        # 返回错误响应
-        return jsonify({
-            'status': 'error',
-            'message': str(e)
-        }), 500       
-    
 
 @app.route('/')
 def index():

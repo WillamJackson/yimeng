@@ -10,3 +10,4 @@ SQLAlchemy==1.4.29
 Werkzeug==2.0.2
 requests>=2.31.0
 websockets==10.4
+Flask-Migrate==4.0.5
