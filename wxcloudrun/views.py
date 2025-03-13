@@ -27,33 +27,7 @@ def create_workflow_task_base():
         return jsonify({
             'status': 'error',
             'message': str(e)
-        }), 500
-    
-@app.route('/api/get_task_status', methods=['GET'])
-def get_task_status():
-    """API 接口：获取任务状态"""
-    try:
-        # 获取请求体参数
-        task_id = request.args.get('task_id')
-        
-        # 初始化 DrawingTool
-        tool = DrawingTool()
-        
-        # 调用 get_task_images 方法
-        images = tool.get_task_images(task_id)
-        
-        # 返回成功响应
-        return jsonify({
-            'status': 'success',
-            'images': images
-        }), 200
-    except Exception as e:
-        # 返回错误响应
-        return jsonify({
-            'status': 'error',
-            'message': str(e)
-        }), 500
-        
+        }), 500       
     
 
 @app.route('/')

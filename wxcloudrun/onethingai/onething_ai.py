@@ -16,8 +16,7 @@ class OneThingAI:
     
     def __init__(self):
         self.headers = {
-            "Authorization": f"Bearer {config.api_key}",
-            "Content-Type": "application/json"
+            "Authorization": f"Bearer {config.api_key}"
         }
         
         # 设置重试策略

@@ -86,6 +86,7 @@ class DrawingTool:
             "gpuType": selected_resource['gpuType'],
             "regionId": selected_resource['regionId'],
             "billType": 3,
+            "duration": 1,
             "gpuNum": 1
         }
         create_instance_response = self.one_thing_ai.create_instance(instance_config)

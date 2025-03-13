@@ -10,3 +10,7 @@ db_address = os.environ.get("MYSQL_ADDRESS", 'sh-cynosdbmysql-grp-fts9hnq6.sql.t
 
 # 读取OneThingAI API密钥
 api_key = os.environ.get("ONE_THING_AI_API_KEY", 'fd5c8b952a9c2293c1078e7af7f71949')
+
+jsons_path = [
+    {"base": "wxcloudrun/comfyui/jsons/base.json"},
+]
